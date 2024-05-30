@@ -15,7 +15,7 @@ public class MulticastServer {
             MulticastSocket multicastSocket = new MulticastSocket(port);
             multicastSocket.joinGroup(group);
 
-            System.out.println("Server started. Waiting for commands...");
+            System.out.println("マルチキャスト通信を行います メッセージ待機中...");
 
             // 受信用のバッファを作成
             byte[] buffer = new byte[256];
@@ -24,8 +24,8 @@ public class MulticastServer {
             // コマンドを受信して永遠に待機
             while (true) {
                 multicastSocket.receive(packet);
-                String receivedCommand = new String(packet.getData(), 0, packet.getLength());
-                System.out.println("Received command: " + receivedCommand);
+                String message = new String(packet.getData(), 0, packet.getLength());
+                System.out.println("メッセージが届きました: " + message);
             }
         } catch (IOException e) {
             e.printStackTrace();
